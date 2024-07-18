@@ -1,0 +1,76 @@
+<!-- flask_app/templates/admin.html -->
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mt-4">Admin Panel</h1>
+            <h2 class="mt-4">Users</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ 'Employer' if user.is_employer else 'Client' }}</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-info">Edit</a>
+                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2 class="mt-4">Appointments</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Employer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.client_id }}</td>
+                        <td>{{ appointment.employer_id }}</td>
+                        <td>{{ appointment.appointment_date }}</td>
+                        <td>{{ appointment.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2 class="mt-4">Reviews</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Employer</th>
+                        <th>Comment</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.client_id }}</td>
+                        <td>{{ review.employer_id }}</td>
+                        <td>{{ review.comment }}</td>
+                        <td>{{ review.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
